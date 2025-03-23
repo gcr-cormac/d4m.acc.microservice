@@ -66,7 +66,16 @@ public class D4MACCController {
 		return ResponseEntity.accepted().body(rcvs);
 	}
 
-	@PostMapping(path = "/ins", consumes = MediaType.TEXT_PLAIN_VALUE, produces = "application/json")
+	@PostMapping(path = "/insFHIR", consumes = MediaType.TEXT_PLAIN_VALUE, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<String> insResource(@RequestBody String resource, SDS_FORMAT format, String tableName) {
+
+		acc.insert(resource, format, tableName);
+
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+
+	@PostMapping(path = "/insRCVS", consumes = MediaType.TEXT_PLAIN_VALUE, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<String> insResource(@RequestBody String resource, SDS_FORMAT format, String tableName) {
 
